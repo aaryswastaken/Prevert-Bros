@@ -9,7 +9,7 @@ from common import V2, PLAYER
 
 
 class PhysicsEngine:
-    def __init__(self, maxPlayerSpeed=200, playerLambda=1.1, g=250):
+    def __init__(self, maxPlayerSpeed=200, playerLambda=1.1, g=550):
         self.maxPlayerSpeed = maxPlayerSpeed
         self.playerLambda = playerLambda
         self.g = g
@@ -48,7 +48,7 @@ class PhysicsEngine:
 
         # epsilon = V2(0.01, 0.01)
 
-        s2 = obj.size / 2
+        s2 = obj.size
         p1 = obj.pos - s2.onlyX()
         p2 = obj.pos + s2.onlyY()
         p3 = obj.pos + s2.onlyX()
@@ -59,15 +59,43 @@ class PhysicsEngine:
                 print(f"trying {obj} against {o}")
                 if obj.vel.x > 0 and o.isInScope(p3, p3):
                     obj.vel.x = 0
+                    p = self.findTouching(o, obj.pos, p3)
+                    obj.pos.x = p.x - obj.size.x
 
                 if obj.vel.x < 0 and o.isInScope(p1, p1):
                     obj.vel.x = 0
+                    p = self.findTouching(o, obj.pos, p1)
+                    obj.pos.x = p.x + obj.size.x
 
                 if obj.vel.y > 0 and o.isInScope(p2, p2):
                     obj.vel.y = 0
-                    obj.pos.y = p2.y
+                    p = self.findTouching(o, obj.pos, p2)
+                    obj.pos.y = p.y - obj.size.y
 
                 if obj.vel.y < 0 and o.isInScope(p4, p4):
                     obj.vel.y = 0
-                    obj.pos.y = p4.y + 4
+                    p = self.findTouching(o, obj.pos, p4)
+                    obj.pos.y = p.y + obj.size.y
+
+
+    def findTouching(self, collider, p1, p2, steps=100):
+        for i in range(steps):
+            p = p1 + (p2 - p1) * (i / steps)
+            print(f"---\n{p1}")
+            print(f"{i}, {p}")
+            print(f"{p2}")
+
+            if collider.isInScope(p, p):
+                return p
+
+        return p2
+
+    def isTouchingGround(self, player, objects):
+        for o in objects:
+            if o.uuid != player.uuid:
+                if o.isInScope(player.pos - player.size.onlyY(), \
+                        player.pos - player.size.onlyY()):
+                    return True
+
+        return False
 

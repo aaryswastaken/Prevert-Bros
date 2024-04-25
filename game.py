@@ -72,7 +72,7 @@ class GameManager():
 
             for e in self.inputObjects:
                 print(f"Handling input for {e}")
-                e.handleInput(keys)
+                e.handleInput(keys, self)
 
             self.pE.tick(self.objects, self.dt)
 

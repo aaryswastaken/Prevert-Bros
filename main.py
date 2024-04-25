@@ -24,8 +24,9 @@ if __name__ == "__main__":
     from player import Player
     from common import V2
     manager.addObject(RectGroundPart(V2(0, 0), V2(1000, 200), "#00ff00"))
+    manager.addObject(RectGroundPart(V2(500, 200), V2(1000, 250), "#00ffff"))
     player = Player()
-    player.pos = V2(50, 250)
+    player.pos = V2(50, 350)
     manager.addObject(player, hasInput=True)
 
     ec = manager.run()

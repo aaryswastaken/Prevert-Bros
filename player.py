@@ -11,18 +11,23 @@ from common import V2, drawCross, drawRectangle, PLAYER
 
 
 class Player(Object):
-    def __init__(self, move_a=500):
+    def __init__(self, move_a=500, jump_v=300):
         super().__init__()
 
+        self.r = 30
+
         self.objType = PLAYER
-        self.size = V2(30, 30)
+        self.size = V2(self.r, self.r)
         self.move_a = move_a
+        self.jump_v = jump_v
 
         self.static = False
         self.colliding = True
         self.free = False
 
-    def handleInput(self, keys):
+        self.last_space = False
+
+    def handleInput(self, keys, parent):
         print("Hello from Player.handleInput")
         if keys[pygame.K_d]:
             print("right")
@@ -36,14 +41,20 @@ class Player(Object):
             self.free = True
             self.acc.x = 0
 
+        if keys[pygame.K_SPACE] and parent.pE.isTouchingGround(self, parent.objects):
+            if not self.last_space:
+                self.vel.y = self.jump_v
+                self.last_space = True
+        else:
+            self.last_space = False
+
     def isInScope(self, _p1, _p2):
         return self.pos.inside(_p1, _p2)
 
     def render(self, screen, dy=0, debug=False):
-        r = self.size.x
-        center = V2(r, dy - r) + self.pos.revY()
+        center = V2(0, dy) + self.pos.revY()
 
-        pygame.draw.circle(screen, "#0000ff", center, r)
+        pygame.draw.circle(screen, "#0000ff", center, self.r)
 
         if debug:
             print("debug2")
