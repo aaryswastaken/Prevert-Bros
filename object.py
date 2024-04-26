@@ -8,7 +8,7 @@ import pygame
 from pygame.key import stop_text_input
 from pygame.time import wait
 
-from common import V2, drawCross, GROUND
+from common import V2, drawCross, rectFromPoints, GROUND
 from renderer import convertCoords
 
 
@@ -69,7 +69,7 @@ class RectGroundPart(Object):
     def render(self, screen, viewingCoordinates, debug=False):
         absPos = self.pos - viewingCoordinates
 
-        r = screen.fill(self.color, pygame.Rect(convertCoords(absPos) - self.size.onlyY(), self.size))
+        r = screen.fill(self.color, rectFromPoints(absPos, absPos + self.size))
 
         if debug:
             print("debug")

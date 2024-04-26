@@ -38,8 +38,8 @@ class GameManager():
         self.ssize = V2(self.rE.size[0], self.rE.size[1])
         self.halfScreen = self.ssize / 2
 
-        self.followDx = 120
-        self.followDy = 80
+        self.followDx = 220
+        self.followDy = 180
         self.followIncrement = 2
         self.followVec = V2(self.followDx, self.followDy)
 
@@ -76,7 +76,7 @@ class GameManager():
                     self.stop = True
 
             p1 = self.viewingCoordinates
-            p2 = self.viewingCoordinates + self.halfScreen * 2
+            p2 = self.viewingCoordinates + self.ssize
 
             keys = self.key.get_pressed()
 
@@ -127,22 +127,30 @@ class GameManager():
         while uPos.x > self.ssize.x - self.followDx:
             self.viewingCoordinates.x += self.followIncrement
             uPos = self.players[0].pos - self.viewingCoordinates
-        print("did right")
+
+        if self.debug:
+            print("did right")
 
         # left
         while uPos.x < self.followDx:
             self.viewingCoordinates.x -= self.followIncrement
             uPos = self.players[0].pos - self.viewingCoordinates
-        print("did left")
+
+        if self.debug:
+            print("did left")
 
         # top
         while uPos.y > self.ssize.y - self.followDy:
             self.viewingCoordinates.y += self.followIncrement
             uPos = self.players[0].pos - self.viewingCoordinates
-        print("did top")
+        
+        if self.debug:
+            print("did top")
 
         # bottom
         while uPos.y < self.followDy:
             self.viewingCoordinates.y -= self.followIncrement
             uPos = self.players[0].pos - self.viewingCoordinates
-        print("did bottom")
+    
+        if self.debug:
+            print("did bottom")

@@ -38,3 +38,16 @@ def drawCross(screen, p1, color="#ff0000", size=100):
 
 def drawRectangle(screen, p1, p2, color="#ff0000"):
     pygame.draw.rect(screen, color, pygame.Rect(p1, p2-p1), width=1)
+
+def convertCoords(p1, dy=720):
+    print(f"dy={dy}, p1={p1}")
+    return V2(0, dy) + p1.revY()
+
+def rectFromPoints(p1, p2, corrected=True, dy=720):
+    p1 = convertCoords(p1)
+    p2 = convertCoords(p2)
+
+    _p1 = V2(max(0, min(p1.x, p2.x)), max(0, min(p1.y, p2.y)))
+    _p2 = V2(max(p1.x, p2.x), max(p1.y, p2.y))
+
+    return pygame.Rect(_p1, _p2 - _p1)
