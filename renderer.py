@@ -35,6 +35,3 @@ class RenderingEngine:
     def finaliseFrame(self):
         pygame.display.flip()
 
-def convertCoords(p1, dy=720):
-    print(f"dy={dy}, p1={p1}")
-    return V2(0, dy) + p1.revY()

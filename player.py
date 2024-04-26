@@ -7,8 +7,7 @@
 import pygame
 
 from object import Object
-from common import V2, drawCross, drawRectangle, PLAYER
-from renderer import convertCoords
+from common import V2, drawCross, drawRectangle, convertCoords, PLAYER
 
 
 class Player(Object):

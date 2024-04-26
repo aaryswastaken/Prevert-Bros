@@ -8,8 +8,7 @@ import pygame
 from pygame.key import stop_text_input
 from pygame.time import wait
 
-from common import V2, drawCross, rectFromPoints, GROUND
-from renderer import convertCoords
+from common import V2, drawCross, rectFromPoints, convertCoords, GROUND
 
 
 class Object:
