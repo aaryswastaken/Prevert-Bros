@@ -23,8 +23,9 @@ if __name__ == "__main__":
     from object import RectGroundPart
     from player import Player
     from common import V2
-    manager.addObject(RectGroundPart(V2(0, 0), V2(1000, 200), "#00ff00"))
-    manager.addObject(RectGroundPart(V2(500, 200), V2(1000, 250), "#00ffff"))
+    manager.addObject(RectGroundPart(V2(0, 0), V2(3000, 200), "#00ff00"))
+    manager.addObject(RectGroundPart(V2(500, 200), V2(300, 50), "#00ffff"))
+    # manager.addObject(RectGroundPart(V2(800, 300), V2(200, 200), "#00ffff"))
     player = Player()
     player.pos = V2(50, 350)
     manager.addObject(player, hasInput=True)

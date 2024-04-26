@@ -5,9 +5,11 @@
 # This file defines a couple of objects
 
 import pygame
+from pygame.key import stop_text_input
 from pygame.time import wait
 
 from common import V2, drawCross, GROUND
+from renderer import convertCoords
 
 
 class Object:
@@ -39,20 +41,20 @@ class Object:
         return "Empty object"
 
 class RectGroundPart(Object):
-    def __init__(self, p1, p2, color):
+    def __init__(self, pos, size, color):
         super().__init__()
 
-        # TODO: refactor p1 and p2 with pos and size
-        self.p1 = p1
-        self.p2 = p2
-        self.size = (self.p1 - self.p2).abs()
+        self.size = size.abs()
+        self.pos = pos
+        
         self.color = color
 
         self.objType = GROUND
 
-        self.pos = (p1 + p2) / 2
 
     def isInScope(self, p1, p2):  # Variables vraiment très mal nommées
+        self.p1 = self.pos + self.size.onlyY()
+        self.p2 = self.pos + self.size.onlyX()
         top_pos = -1 if self.p1.y < p1.y else 1 if self.p1.y > p2.y else 0
         bottom_pos = -1 if self.p2.y < p1.y else 1 if self.p2.y > p2.y else 0
         # if we are not both above screen or both below screen, that means we are vertically visible
@@ -65,12 +67,16 @@ class RectGroundPart(Object):
         return verticaly_visible and horizontal_visible
 
     def render(self, screen, dy=0, debug=False):
-        r = screen.fill(self.color, pygame.Rect(V2(0, dy - self.size.y) + self.p1.revY(), self.size))
+        r = screen.fill(self.color, pygame.Rect(convertCoords(self.pos) - self.size.onlyY(), self.size))
 
         if debug:
             print("debug")
             drawCross(screen, r.center)
+            print(f"CrossA {convertCoords(self.pos)}")
+            drawCross(screen, convertCoords(self.pos), size=50)
+            print(f"CrossB {convertCoords(self.pos + self.size.revY())}")
+            drawCross(screen, convertCoords(self.pos + self.size), size=50)
 
 
     def __str__(self):
-        return f"Rectangle: {self.p1}, {self.p2}"
+        return f"Rectangle: {self.pos}, {self.pos + self.size}"
