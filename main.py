@@ -28,7 +28,7 @@ if __name__ == "__main__":
     # manager.addObject(RectGroundPart(V2(800, 300), V2(200, 200), "#00ffff"))
     player = Player()
     player.pos = V2(50, 350)
-    manager.addObject(player, hasInput=True)
+    manager.addObject(player, hasInput=True, isPlayer=True)
 
     ec = manager.run()
 

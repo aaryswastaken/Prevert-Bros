@@ -34,7 +34,7 @@ class Object:
     def handleInput(self, keys):
         pass
 
-    def render(self, screen, dy=0, debug=False):
+    def render(self, screen, vC, debug=False):
         pass
 
     def __str__(self):
@@ -66,16 +66,18 @@ class RectGroundPart(Object):
 
         return verticaly_visible and horizontal_visible
 
-    def render(self, screen, dy=0, debug=False):
-        r = screen.fill(self.color, pygame.Rect(convertCoords(self.pos) - self.size.onlyY(), self.size))
+    def render(self, screen, viewingCoordinates, debug=False):
+        absPos = self.pos - viewingCoordinates
+
+        r = screen.fill(self.color, pygame.Rect(convertCoords(absPos) - self.size.onlyY(), self.size))
 
         if debug:
             print("debug")
             drawCross(screen, r.center)
             print(f"CrossA {convertCoords(self.pos)}")
-            drawCross(screen, convertCoords(self.pos), size=50)
+            drawCross(screen, convertCoords(absPos), size=50)
             print(f"CrossB {convertCoords(self.pos + self.size.revY())}")
-            drawCross(screen, convertCoords(self.pos + self.size), size=50)
+            drawCross(screen, convertCoords(absPos + self.size), size=50)
 
 
     def __str__(self):

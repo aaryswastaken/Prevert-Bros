@@ -8,6 +8,7 @@ import pygame
 
 from object import Object
 from common import V2, drawCross, drawRectangle, PLAYER
+from renderer import convertCoords
 
 
 class Player(Object):
@@ -51,8 +52,10 @@ class Player(Object):
     def isInScope(self, _p1, _p2):
         return self.pos.inside(_p1, _p2)
 
-    def render(self, screen, dy=0, debug=False):
-        center = V2(0, dy) + self.pos.revY()
+    def render(self, screen, vC, debug=False):
+        absPos = self.pos - vC
+
+        center = convertCoords(absPos)
 
         pygame.draw.circle(screen, "#0000ff", center, self.r)
 

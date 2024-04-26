@@ -27,10 +27,10 @@ class RenderingEngine:
     def newFrame(self):
         self.screen.fill("black")
 
-    def render(self, obj, debug=False):
+    def render(self, obj, viewingCoords, debug=False):
         # dy is to flip the screen
         print(f"Rendering {str(obj)} from rE")
-        obj.render(self.screen, dy=self.dy, debug=debug)
+        obj.render(self.screen, viewingCoords, debug=debug)
 
     def finaliseFrame(self):
         pygame.display.flip()
