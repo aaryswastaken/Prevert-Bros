@@ -38,8 +38,16 @@ class RenderingEngine:
         if self.bg is None:
             self.screen.fill("black")
             return 1
-
-        self.screen.blit(self.bg, vpos.revX() / self.pFactor)
+        
+        bgSize = self.bg.get_rect()
+        
+        # Should write this as a shader
+        _vpos = vpos
+        cnt = 0
+       
+        while vpos.x < self.size[0]:
+            self.screen.blit(self.bg, vpos / self.pFactor)
+            vpos += V2(bgSize.w * self.pFactor, 0)
 
 
     def render(self, obj, viewingCoords, debug=False):

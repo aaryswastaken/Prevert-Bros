@@ -81,9 +81,9 @@ class PhysicsEngine:
     def findTouching(self, collider, p1, p2, steps=100):
         for i in range(steps):
             p = p1 + (p2 - p1) * (i / steps)
-            print(f"---\n{p1}")
-            print(f"{i}, {p}")
-            print(f"{p2}")
+            # print(f"---\n{p1}")
+            # print(f"{i}, {p}")
+            # print(f"{p2}")
 
             if collider.isInScope(p, p):
                 return p
