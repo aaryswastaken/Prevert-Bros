@@ -70,6 +70,7 @@ class GameManager():
                 print(f"{len(self.objects)} objects and {len(self.inputObjects)} input objects")
 
             self.rE.newFrame()
+            self.rE.printBG(self.viewingCoordinates)
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:

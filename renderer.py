@@ -10,11 +10,13 @@ from common import V2
 
 
 class RenderingEngine:
-    def __init__(self, parent, size=(1280, 720)):
+    def __init__(self, parent, size=(1280, 720), pfactor = 2):
         self.parent = parent
 
         self.size = size
         self.dy = size[1]
+
+        self.pFactor = pfactor
 
     def init(self):
         pygame.init()
@@ -24,8 +26,21 @@ class RenderingEngine:
         self.parent.clock = self.clock
         self.parent.key = pygame.key
 
+        self.bg = None
+        if self.parent.debug:
+            self.bg = pygame.image.load("bg_debug.png")
+            self.bg = self.bg.convert()
+
     def newFrame(self):
         self.screen.fill("black")
+
+    def printBG(self, vpos):
+        if self.bg is None:
+            self.screen.fill("black")
+            return 1
+
+        self.screen.blit(self.bg, vpos.revX() / self.pFactor)
+
 
     def render(self, obj, viewingCoords, debug=False):
         # dy is to flip the screen

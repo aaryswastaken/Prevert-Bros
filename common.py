@@ -23,6 +23,9 @@ class V2(pygame.Vector2):
     def revY(self):
         return V2(self.x, -self.y)
 
+    def revX(self):
+        return V2(-self.x, self.y)
+
     def onlyX(self):
         return V2(self.x, 0)
 
