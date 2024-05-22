@@ -5,11 +5,13 @@ class Pieces(tk.Tk, Objet):
     __slots__=["canvas","compteur"]
     def __init__(self):
         super().__init__()
-        self.x_centre_piece = x_centre
-        self.y_centre_piece = y_centre
+        self.x_centre_piece = Objet.x_centre
+        self.y_centre_piece = Objet.y_centre
+        x_perso = Player.pos[0]
+        y_perso = Player.pos[1]
         self.compteur =0
         self.creer_widgets()
-        #self.disparition_piece()
+        self.disparition_piece()
     
     
     def creer_widgets(self):
@@ -23,7 +25,7 @@ class Pieces(tk.Tk, Objet):
         self.canvas.create_oval((22, 21), (23, 22), fill="brown")
         self.canvas.pack()
     
-    """    
+        
     def disparition_piece(self):#OU EST CE QUIL FAUT LA METTRE: DANS LE CONTROLEUR ? EN CODE? DANS LAFFIHCAGE?
         #APPELER LA POSITION DU PLAYER
         # JE SAIS PAS COMMENT ON FAIT 
@@ -33,7 +35,7 @@ class Pieces(tk.Tk, Objet):
         if x_perso in xpossible and y_perso in ypossible:
             self.canvas.destroy()
             self.compteur+=1
-    """        
+            
             
         
 
