@@ -1,14 +1,16 @@
 import tkinter as tk
-from class_objet import Objet
+#from class_objet import Objet Prendre classe Aarys ?
+from object import Object
 
-class Pieces(tk.Tk, Objet):
-    __slots__=["canvas","compteur"]
+#class Pieces(tk.Tk, Objet):
+class Pieces(tk.Tk, Object):
+    __slots__=["canvas","compteur","x_perso","y_perso"]
     def __init__(self):
         super().__init__()
         self.x_centre_piece = Objet.x_centre
         self.y_centre_piece = Objet.y_centre
-        x_perso = Player.pos[0]
-        y_perso = Player.pos[1]
+        self.x_perso = Player.pos[0]
+        self.y_perso = Player.pos[1]
         self.compteur =0
         self.creer_widgets()
         self.disparition_piece()
@@ -30,18 +32,10 @@ class Pieces(tk.Tk, Objet):
         #APPELER LA POSITION DU PLAYER
         # JE SAIS PAS COMMENT ON FAIT 
         
-        xpossible=(self.x_centre_piece -15, self.x_centre_piece+15)
-        ypossible = (self.x_centre_piece -15, self.x_centre_piece+15)
-        if x_perso in xpossible and y_perso in ypossible:
+        if (self.x_centre_piece - 15 <= self.x_perso and self.x_perso <= self.x_centre_piece + 15) and (self.y_centre_piece - 15 <= self.y_perso and self.y_perso <= self.y_centre_piece + 15):
+
             self.canvas.destroy()
             self.compteur+=1
-            
-            
-        
-
-
-
-
 
 
 piece=Pieces()
