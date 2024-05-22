@@ -13,7 +13,7 @@ class fenetre(tk.Tk):
         self.caneva = tk.Canvas(self, width=300, height=300)
         self.caneva.grid()
         
-        self.img = tk.PhotoImage(master = self.caneva, file='test.png')
+        self.img = tk.PhotoImage(master = self.caneva, file='testremovebg-preview.png')
         self.image = self.caneva.create_image(150, 150, image=self.img) 
         self.x = 0
         
