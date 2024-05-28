@@ -12,15 +12,21 @@ from common import V2, drawCross, rectFromPoints, convertCoords, GROUND
 
 
 class Object:
+    """
+        This class defines a generic object
+    """
+
     def __init__(self):
         self.uuid = None
         
-        self.pos = V2(0,0)
-        self.vel = V2(0,0)
-        self.acc = V2(0,0)
+        self.pos = V2(0,0) # Position vector
+        self.vel = V2(0,0) # speed vector
+        self.acc = V2(0,0) # acceleration vector
 
+        # size if applicable
         self.size = V2(0,0)
 
+        # That has to change (TODO)
         self.static = True
         self.colliding = True
         self.objType = None
@@ -40,6 +46,10 @@ class Object:
         return "Empty object"
 
 class RectGroundPart(Object):
+    """
+        Defines a ground part that is rectangular
+    """
+
     def __init__(self, pos, size, color):
         super().__init__()
 
@@ -66,10 +76,12 @@ class RectGroundPart(Object):
         return verticaly_visible and horizontal_visible
 
     def render(self, screen, viewingCoordinates, debug=False):
+        # render the object to the screen, here a rectangle
         absPos = self.pos - viewingCoordinates
 
         r = screen.fill(self.color, rectFromPoints(absPos, absPos + self.size))
 
+        # if debug, we print the boundaries too 
         if debug:
             print("debug")
             drawCross(screen, r.center)

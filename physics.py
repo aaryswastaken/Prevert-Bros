@@ -9,24 +9,29 @@ from common import V2, PLAYER
 
 
 class PhysicsEngine:
+    """
+        Main class for the physics engine
+    """
+
     def __init__(self, maxPlayerSpeed=200, playerLambda=1.1, g=550):
         self.maxPlayerSpeed = maxPlayerSpeed
-        self.playerLambda = playerLambda
+        self.playerLambda = playerLambda # adhesion to the ground
         self.g = g
 
     def tick(self, objects, dt):
         for o in objects:
             if not o.static:
                 if o.objType == PLAYER and o.free:
-                    o.acc.x = -self.playerLambda * o.vel.x
+                    o.acc.x = -self.playerLambda * o.vel.x # friction with the ground
 
-                o.vel += (o.acc + V2(0, -self.g)) * dt
+                o.vel += (o.acc + V2(0, -self.g)) * dt # compute velocity
 
-                self.checkCollisions(o, objects)
+                self.checkCollisions(o, objects) # check for eventual collisions with the other objects
 
-                o.pos += o.vel * dt
+                o.pos += o.vel * dt # update the position
 
-                if o.objType == PLAYER:
+                if o.objType == PLAYER: # if it's a player
+                    # cap its limit speeds
                     if o.vel.x > self.maxPlayerSpeed:
                         o.vel.x = self.maxPlayerSpeed
 
@@ -34,6 +39,10 @@ class PhysicsEngine:
                         o.vel.x = -self.maxPlayerSpeed
    
     def checkCollisions(self, obj, objects):
+        """
+            check for collisions from an object to the other objects, update obj's velocity if needed
+        """
+
         if not obj.colliding:
             print(f"{obj} not colliding")
             return obj.vel
@@ -48,6 +57,11 @@ class PhysicsEngine:
 
         # epsilon = V2(0.01, 0.01)
 
+        #
+        # In this trash algorithm, we use the power of the isInScope function to handle collisions
+        # simply by calculating (p1 ... p4)'s collisions with each colliding objects
+        #
+
         s2 = obj.size
         p1 = obj.pos - s2.onlyX()
         p2 = obj.pos + s2.onlyY()
@@ -57,9 +71,9 @@ class PhysicsEngine:
         for o in objects:
             if o.uuid != obj.uuid:
                 print(f"trying {obj} against {o}")
-                if obj.vel.x > 0 and o.isInScope(p3, p3):
-                    obj.vel.x = 0
-                    p = self.findTouching(o, obj.pos, p3)
+                if obj.vel.x > 0 and o.isInScope(p3, p3): # if we're going right and the right collides,
+                    obj.vel.x = 0 # sets its velocity back
+                    p = self.findTouching(o, obj.pos, p3) # set its position back
                     obj.pos.x = p.x - obj.size.x
 
                 if obj.vel.x < 0 and o.isInScope(p1, p1):
@@ -79,6 +93,10 @@ class PhysicsEngine:
 
 
     def findTouching(self, collider, p1, p2, steps=100):
+        # Same, harnessing the power of the isInScope method, we can approximate the collision point
+        # between two objects. For that, it'll divide the p1p2 vector into n [steps] steps and check for
+        # collision for each of them 
+
         for i in range(steps):
             p = p1 + (p2 - p1) * (i / steps)
             # print(f"---\n{p1}")
@@ -91,6 +109,7 @@ class PhysicsEngine:
         return p2
 
     def isTouchingGround(self, player, objects):
+        # Check if the player is touching ground, once again using isInScope
         for o in objects:
             if o.uuid != player.uuid:
                 if o.isInScope(player.pos - player.size.onlyY(), \
