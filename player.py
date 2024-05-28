@@ -74,3 +74,18 @@ class Player(Object):
 
     def __str__(self):
         return "Player"
+
+
+#/!\ PAREIL QUE POUR LES PLATEFORMES, CODE à MODIFIER POUR QUE LE PERSO SOIT PLUS BEAU :
+#A METTRE DANS CODE DE L'AFFICHAGE
+class ImagePlayer(Player):
+    """
+    Apporte un aspect plus esthétique au personnage
+    """
+    def __init__(self, move_a=500, jump_v=300, chemin):
+        super().__init__(move_a, jump_v) 
+        self.chemin = pygame.image.load(chemin).convert() #apparemment c'est pour charger et convertir l'image
+
+    def render2(self, screen, vC, debug=False): # /!\ POUR LE COUP JAI JUSTE RECOPIER CELLE D'AVANT MAIS JE PENSE QUE YA DES CHOSES A CHANGER MAIS JAI PAS TOUT COMPRIS
+        absPos = self.pos - vC
+        screen.blit(self.image, absPos)
