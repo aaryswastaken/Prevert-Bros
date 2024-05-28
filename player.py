@@ -39,7 +39,7 @@ class Player(Object):
             print("right")
             self.free = False
             self.acc.x = self.move_a # change acceleration accordingly
-        elif keys[pygame.K_a]:
+        elif keys[pygame.K_q]:
             print("left")
             self.free = False
             self.acc.x = -self.move_a
