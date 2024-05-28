@@ -35,11 +35,11 @@ class Player(Object):
         # print("Hello from Player.handleInput")
 
         # Handles the input for the player
-        if keys[pygame.K_d]:
+        if keys[pygame.K_RIGHT]:
             print("right")
             self.free = False
             self.acc.x = self.move_a # change acceleration accordingly
-        elif keys[pygame.K_q]:
+        elif keys[pygame.K_LEFT]:
             print("left")
             self.free = False
             self.acc.x = -self.move_a
