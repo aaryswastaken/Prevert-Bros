@@ -34,21 +34,23 @@ class Ennemi(Object):
 
     def render(self, screen, vC, debug=False): 
         absPos = self.pos - vC
+
         screen.blit(self.chemin_image, absPos)
 
-        if debug:
-            print("debug2")
-            drawCross(screen, center)
-            drawRectangle(screen, center - self.size, center + self.size)
 
-    def deplacement(self):
+    def deplacement_droite(self):
         """
         permet le déplacement automatique de l'ennemi
         """
         #TANT QUE JEU NEST PAS TERMINE JE SAIS PAS TROP QUOI DIRE
-            self.pos[0] += self.vel * self.distance
-            self.after(500, self.pos[0] -= self.vel* self.distance)
-        
+            #self.pos[0] += self.vel * self.distance
+        self.after(500, self.deplacement_gauche())
+    
+    def deplacement_gauche(self):
+        """
+        permet le déplacement vers la gauche de l'ennemi
+        """
+        self.pos[0] -= self.vel* self.distance
         
 
     def __str__(self):
