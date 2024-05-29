@@ -108,7 +108,7 @@ class PlateformeGroundPart(RectGroundPart):
     def render2(self, screen, viewingCoordinates, debug=False): # /!\ POUR LE COUP JAI JUSTE RECOPIER CELLE D'AVANT MAIS JE PENSE QUE YA DES CHOSES A CHANGER MAIS JAI PAS TOUT COMPRIS
         absPos = self.pos - viewingCoordinates
         #Fonction .blit(image, coord point en haut à gauche) pour afficger l'image sur l'écran
-        screen.blit(self.image, absPos)
+        screen.blit(self.chemin, absPos)
 
 
 #dans l'appel, ne pas oublier le chemin entier de l'image
