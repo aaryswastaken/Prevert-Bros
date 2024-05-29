@@ -1,14 +1,13 @@
 import tkinter as tk
-#from class_objet import Objet Prendre classe Aarys ?
 from object import Object
+from player import Player
 
-#class Pieces(tk.Tk, Objet):
-class Pieces(tk.Tk, Object):
+class Pieces(tk.Tk, Object, Player):
     __slots__=["canvas","compteur","x_perso","y_perso"]
     def __init__(self):
         super().__init__()
-        self.x_centre_piece = Objet.x_centre
-        self.y_centre_piece = Objet.y_centre
+        self.x_centre_piece = Object.pos[0] 
+        self.y_centre_piece = Object.pos[1]
         self.x_perso = Player.pos[0]
         self.y_perso = Player.pos[1]
         self.compteur =0
@@ -36,6 +35,11 @@ class Pieces(tk.Tk, Object):
 
             self.canvas.destroy()
             self.compteur+=1
+            
+            
+        
+
+
 
 
 piece=Pieces()
