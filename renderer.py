@@ -10,31 +10,42 @@ from common import V2
 
 
 class RenderingEngine:
+    """
+        The rendering engine is written so that we can later replace it with a cutom opengl renderer
+    """
+
     def __init__(self, parent, size=(1280, 720), pfactor = 2):
         self.parent = parent
 
         self.size = size
         self.dy = size[1]
 
-        self.pFactor = pfactor
+        self.pFactor = pfactor # parallax factor for the background
 
-    def init(self):
-        pygame.init()
-        self.screen = pygame.display.set_mode(self.size)
-        self.clock = pygame.time.Clock()
+    def init(self): 
+        # initialise the renderer
 
-        self.parent.clock = self.clock
-        self.parent.key = pygame.key
+        pygame.init() # open a window
+        self.screen = pygame.display.set_mode(self.size) # set it to the right side
+        self.clock = pygame.time.Clock() # define the world clock
+
+        self.parent.clock = self.clock # set the clock back to the GameManager
+        self.parent.key = pygame.key # same for keys
 
         self.bg = None
         if self.parent.debug:
+            # if debug, we use the bg_debug.png as a background
             self.bg = pygame.image.load("bg_debug.png")
             self.bg = self.bg.convert()
 
     def newFrame(self):
+        # Initialise a new Frame (sets everything back black)
+
         self.screen.fill("black")
 
     def printBG(self, vpos):
+        # Print the background, vpos is the viewing position defined as the bottom left corner of the viewing sight
+
         if self.bg is None:
             self.screen.fill("black")
             return 1
@@ -45,6 +56,7 @@ class RenderingEngine:
         _vpos = vpos
         cnt = 0
        
+        # TODO: Because not working. Background need to self replicate to make a long one
         while vpos.x < self.size[0]:
             self.screen.blit(self.bg, vpos / self.pFactor)
             vpos += V2(bgSize.w * self.pFactor, 0)
@@ -56,5 +68,7 @@ class RenderingEngine:
         obj.render(self.screen, viewingCoords, debug=debug)
 
     def finaliseFrame(self):
+        # End the frame by showing the player the screen 
+        
         pygame.display.flip()
 

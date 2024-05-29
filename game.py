@@ -15,6 +15,10 @@ from common import V2
 
 
 class GameManager():
+    """
+        The overall manager
+    """
+
     def __init__(self, debug=False, tfps=60):
         self.debug = debug 
         self.targetFps = tfps
@@ -48,6 +52,16 @@ class GameManager():
             self.dfont = pygame.font.SysFont("Jetbrains Mono", 30)
 
     def addObject(self, obj, hasInput=False, isPlayer=False):
+        """
+            addObject: references a new object
+
+            inputs:
+             - obj: object
+             - hasInput: bool, if it has inpurts (ie. playable character)
+             - isPlayer: bool, if it's the player
+
+        """
+
         obj.uuid = self.uuid_counter
         self.uuid_counter += 1
 
@@ -60,45 +74,58 @@ class GameManager():
             self.players.append(obj)
 
     def run(self):
+        """
+            run: Main loop of the game
+        """
+
         if self.key is None or self.clock is None:
             print("There has been an error, please check logs, err-state: run init")
             return 1
         
+        # While the game didn't end
         while not self.stop:
             if self.debug:
                 print("New frame")
                 print(f"{len(self.objects)} objects and {len(self.inputObjects)} input objects")
 
-            self.rE.newFrame()
-            self.rE.printBG(self.viewingCoordinates)
+            self.rE.newFrame() # Initalise a new frame by the rendering engine
+            self.rE.printBG(self.viewingCoordinates) # Add the background
 
+            # Empties the event buffer
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.stop = True
 
+            # Small definitions, self explainatory
             p1 = self.viewingCoordinates
             p2 = self.viewingCoordinates + self.ssize
 
-            keys = self.key.get_pressed()
+            keys = self.key.get_pressed() # Fetching pressed keys
 
             if keys[pygame.K_a]:
-                print("[!] a is pressed")
+                print("[!] a is pressed") # debug
 
+            # Looping through objects that where referenced using the hasInput flag
             for e in self.inputObjects:
                 print(f"Handling input for {e}")
-                e.handleInput(keys, self)
+                e.handleInput(keys, self) # Handle eventual inputs
 
+            # Tick the physics engine
             self.pE.tick(self.objects, self.dt)
 
+            # Check if the view has moved
             self.checkOutOfBounds()
 
+            # Some debug
             print(f"Updated viewingCoordinates: {self.viewingCoordinates}")
 
-            for e in self.objects:
-                if e.isInScope(p1, p2):
-                    print(f"Object {str(e)} is in scope")
-                    self.rE.render(e, self.viewingCoordinates, debug=self.debug)
+            for e in self.objects: # for every object
+                if e.isInScope(p1, p2): # if it has to be drawn 
+                    print(f"Object {str(e)} is in scope") # debug
+                    self.rE.render(e, self.viewingCoordinates, debug=self.debug) # render the object through the rendering engine
 
+
+            # If debug, do debug thing
             if self.debug:
                 pygame.draw.rect(self.rE.screen, "red",
                         pygame.Rect(self.followVec, self.ssize - self.followVec * 2), width=1)
@@ -108,20 +135,21 @@ class GameManager():
                     dbsf = self.dfont.render(f"FPS: {fps:.1f}", False, "#ff0000")
                     self.rE.screen.blit(dbsf, (5, 5))
 
-            # DEBUG
-            # if self.debug:
-            #     for i in range(720):
-            #         clr = "#ffffff"
-            #         if self.objects[0].isInScope(V2(0, i), V2(0, i)):
-            #             clr = "#ffff00"
-            #         pygame.draw.rect(self.rE.screen, clr, pygame.Rect(V2(0, 720-i), V2(5, 1)))
-
-
+            
+            # Finalise the frame and show it to the player
             self.rE.finaliseFrame()
             
+            # Ticking
             self.dt = self.clock.tick(self.targetFps) / 1000
 
     def checkOutOfBounds(self):
+        """
+            Check if the player is our of the bonds and the viewing position needs to 
+                be updated
+        """
+
+
+        # Relative position
         uPos = self.players[0].pos - self.viewingCoordinates
         
         # right
