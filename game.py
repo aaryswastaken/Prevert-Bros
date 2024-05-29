@@ -116,6 +116,12 @@ class GameManager():
             # Check if the view has moved
             self.checkOutOfBounds()
 
+            # edit mort du joueur
+            for p in self.players:
+                if p.pos[1] < 0:
+                    print(f"{p} est mort")
+                    #si ça marche gérer le score puis exit
+
             # Some debug
             print(f"Updated viewingCoordinates: {self.viewingCoordinates}")
 
