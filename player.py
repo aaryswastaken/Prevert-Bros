@@ -48,7 +48,7 @@ class Player(Object):
             self.acc.x = 0
 
         if keys[pygame.K_SPACE] and parent.pE.isTouchingGround(self, parent.objects): 
-            # if space is pressed and the physics engine tellls us the player is touching grounf
+            # if space is pressed and the physics engine tells us the player is touching grounf
             if not self.last_space:
                 self.vel.y = self.jump_v # set the velocity to jump
                 self.last_space = True # debounce 
