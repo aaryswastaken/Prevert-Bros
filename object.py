@@ -36,7 +36,7 @@ class Object:
         # using p1 and p2 as two opposites point of the said screen
         return False
 
-    def handleInput(self, keys):
+    def handleInput(self, keys, parent):
         pass
 
     def render(self, screen, vC, debug=False):
