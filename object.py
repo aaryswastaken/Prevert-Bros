@@ -115,16 +115,17 @@ class PlateformeGroundPart(RectGroundPart):
 
 class Cookie(Object):
 
-    def __init__(self):
+    def __init__(self, pos):
         super().__init__()
 
-    self.r =10
-    self.objType = NPC
-    self.size = V2(self.r, self.r)
+        self.pos = pos
+        self.r =10
+        self.objType = NPC
+        self.size = V2(self.r, self.r)
 
-    self.static = True
-    self.colliding = True
-    self.free = False
+        self.static = True
+        self.colliding = True
+        self.free = False
 
     def render(self, screen, viewingCoordinates, debug = False):
         #Création de pièces
