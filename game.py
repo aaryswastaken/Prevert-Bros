@@ -141,7 +141,7 @@ class GameManager():
                 if self.dt != 0:
                     fps = 1/self.dt 
                     dbsf = self.dfont.render(f"FPS: {fps:.1f}", False, "#ff0000")
-                    self.rE.screen.blit(dbsf, (5, 5))
+                    self.rE.screen.blit(dbsf, (100, 5))
 
             self.rE.renderTime(self.time.get_ticks() / 1000, self.givenTime)
 

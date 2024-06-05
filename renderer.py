@@ -66,13 +66,56 @@ class RenderingEngine:
         bgSize = self.bg.get_rect()
         
         # Should write this as a shader
-        _vpos = vpos
         cnt = 0
        
+        vpos = vpos.revX() / self.pFactor
+        _vpos = vpos
+
         # TODO: Because not working. Background need to self replicate to make a long one
+        self.screen.blit(self.bg, vpos)
+
         while vpos.x < self.size[0]:
-            self.screen.blit(self.bg, vpos / self.pFactor)
-            vpos += V2(bgSize.w * self.pFactor, 0)
+            temp_vpos = vpos.clone()
+
+            while vpos.y < self.size[1]:
+                vpos += V2(0, bgSize.h)
+                self.screen.blit(self.bg, vpos)
+
+            vpos = temp_vpos.clone()
+
+            while vpos.y > 0:
+                vpos += V2(0, -bgSize.h)
+                self.screen.blit(self.bg, vpos)
+
+            vpos = temp_vpos.clone()
+            vpos += V2(bgSize.w, 0)
+            self.screen.blit(self.bg, vpos)
+
+        vpos = _vpos
+        first = True
+        second = True
+
+        while vpos.x >= 0 or second:
+            if not first and second:
+                second = False
+            
+            first = False
+            
+            temp_vpos = vpos.clone()
+
+            while vpos.y < self.size[1]:
+                vpos += V2(0, bgSize.h)
+                self.screen.blit(self.bg, vpos)
+
+            vpos = temp_vpos.clone()
+
+            while vpos.y > 0:
+                vpos += V2(0, -bgSize.h)
+                self.screen.blit(self.bg, vpos)
+
+            vpos = temp_vpos.clone()
+            vpos += V2(-bgSize.w, 0)
+            self.screen.blit(self.bg, vpos)
 
 
     def render(self, obj, viewingCoords, debug=False):
