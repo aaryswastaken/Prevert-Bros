@@ -129,10 +129,8 @@ class Cookie(Object):
     def render(self, screen, viewingCoordinates, debug = False):
         #Création de pièces
         absPos = self.pos - viewing Coordinates
-
-    centre = convertCoords(absPos)
-
-    pygame.draw.circle(screen, "#db911a" , center, self.r)
+        centre = convertCoords(absPos)
+        pygame.draw.circle(screen, "#db911a" , center, self.r)
 
     def __str__(self):
         return "Cookie"
