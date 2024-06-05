@@ -35,6 +35,8 @@ if __name__ == "__main__":
     player.pos = V2(50, 350)
     manager.addObject(player, hasInput=True, isPlayer=True)
 
+    manager.addObject(Cookie(V2(25,25)))
+                
     ec = manager.run()
 
     if ec != 0:
