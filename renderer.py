@@ -21,16 +21,23 @@ class RenderingEngine:
         self.dy = size[1]
 
         self.pFactor = pfactor # parallax factor for the background
+        
+        self.font = None
+        
 
     def init(self): 
         # initialise the renderer
 
         pygame.init() # open a window
         self.screen = pygame.display.set_mode(self.size) # set it to the right side
+        self.time = pygame.time
         self.clock = pygame.time.Clock() # define the world clock
 
+        self.parent.time = self.time
         self.parent.clock = self.clock # set the clock back to the GameManager
         self.parent.key = pygame.key # same for keys
+
+        self.font = pygame.font.SysFont("Jetbrains Mono", 50)
 
         self.bg = None
         if self.parent.debug:
@@ -42,6 +49,12 @@ class RenderingEngine:
         # Initialise a new Frame (sets everything back black)
 
         self.screen.fill("black")
+
+    def renderTime(self, time, targetTime):
+        # Render the remaining time 
+
+        time = self.font.render(f"{targetTime - time:.0f}", False, "#ffffff")
+        self.screen.blit(time, (5, 5))
 
     def printBG(self, vpos):
         # Print the background, vpos is the viewing position defined as the bottom left corner of the viewing sight
