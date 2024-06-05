@@ -14,15 +14,13 @@ class Ennemi(Object):
         self.r = 15
 
         self.chemin_image = pygame.image.load(chemin_image).convert()
-        self.distance = 30
         self.objType = NPC
         self.size = V2(self.r, self.r)
         Object.vel = V2(15,15) #valeur aléatoire à voir, j'ai pas tout compris ce que ça donnait
         
         self.static = False
         self.colliding = True
-
-        #les 2 suivants j'ai pas trop compris à quoi ils correspondaient mais j'ai laissé au cas où
+        
         self.free = False 
         self.last_space = False
 
@@ -38,19 +36,17 @@ class Ennemi(Object):
         screen.blit(self.chemin_image, absPos)
 
 
-    def deplacement_droite(self):
+    def deplacement_droite(self,dt):
         """
-        permet le déplacement automatique de l'ennemi
+        permet le déplacement vers la droite de l'ennemi
         """
-        #TANT QUE JEU NEST PAS TERMINE JE SAIS PAS TROP QUOI DIRE
-            #self.pos[0] += self.vel * self.distance
-        self.after(500, self.deplacement_gauche())
+        self.pos[0] += self.vel * dt
     
-    def deplacement_gauche(self):
+    def deplacement_gauche(self, dt):
         """
         permet le déplacement vers la gauche de l'ennemi
         """
-        self.pos[0] -= self.vel* self.distance
+        self.pos[0] -= self.vel* dt
         
 
     def __str__(self):
