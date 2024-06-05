@@ -118,3 +118,18 @@ class PhysicsEngine:
 
         return False
 
+    def isTouchingCookie(self, player, cookie):
+        # Vérifie sir le joueur touche le cookie
+        if cookie.uuid != player.uuid:
+            if cookie.isInScope(player.pos - player.size.onlyY(), \
+                        player.pos - player.size.onlyY()):
+                    return True
+        return False
+
+     def isTouchingEnnemi(self, player, ennemi):
+        # Vérifie si le joueur touche un ennemi
+        if ennemi.uuid != player.uuid:
+            if ennemi.isInScope(player.pos - player.size.onlyY(), \
+                        player.pos - player.size.onlyY()):
+                    return True
+        return False
