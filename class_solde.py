@@ -1,14 +1,15 @@
 import tkinter as tk
 
 '''
-il faut utiliser after et non sleep '''
+    il faut utiliser after et non sleep 
+'''
 
 class Solde:
     __slots__=['solde_initial', 'solde_restant']
     
     def __init__(self):
         self.solde_initial = 200
-        self.solde_restant=0
+        self.solde_restant = 0
     
     def decompte(self):
         self.solde_initial -=1

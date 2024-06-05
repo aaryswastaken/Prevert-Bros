@@ -82,7 +82,7 @@ class ImagePlayer(Player):
     """
     Apporte un aspect plus esthétique au personnage
     """
-    def __init__(self, move_a=500, jump_v=300, chemin):
+    def __init__(self, chemin, move_a=500, jump_v=300):
         super().__init__(move_a, jump_v) 
         self.chemin = pygame.image.load(chemin).convert() #apparemment c'est pour charger et convertir l'image
 
