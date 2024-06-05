@@ -19,7 +19,7 @@ class Ennemi(Object):
         self.r = 15
 
         self.chemin_image = pygame.image.load(chemin_image).convert()
-        self.objType = NPC
+        self.objType = ENNEMY
         self.size = V2(self.r, self.r)
         Object.vel = V2(15,15) #valeur aléatoire à voir, j'ai pas tout compris ce que ça donnait
         
