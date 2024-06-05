@@ -11,6 +11,7 @@ PLAYER = 0
 GROUND = 1
 NPC = 2
 STATIC = 3
+ENNEMY = 4
 
 
 class V2(pygame.Vector2):
