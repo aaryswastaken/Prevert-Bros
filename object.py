@@ -105,13 +105,35 @@ class PlateformeGroundPart(RectGroundPart):
         super().__init__(pos, size, None) #car pas de couleur pour une image ou au pire enlever couleur dans la classe parent ??
         self.chemin = pygame.image.load(chemin).convert() #apparemment c'est pour charger et convertir l'image
 
-    def render2(self, screen, viewingCoordinates, debug=False): # /!\ POUR LE COUP JAI JUSTE RECOPIER CELLE D'AVANT MAIS JE PENSE QUE YA DES CHOSES A CHANGER MAIS JAI PAS TOUT COMPRIS
+    def render(self, screen, viewingCoordinates, debug=False): # /!\ POUR LE COUP JAI JUSTE RECOPIER CELLE D'AVANT MAIS JE PENSE QUE YA DES CHOSES A CHANGER MAIS JAI PAS TOUT COMPRIS
         absPos = self.pos - viewingCoordinates
-        #Fonction .blit(image, coord point en haut à gauche) pour afficger l'image sur l'écran
+        #Fonction .blit(image, coord point en haut à gauche) pour afficher l'image sur l'écran
         screen.blit(self.chemin, absPos)
-
 
 #dans l'appel, ne pas oublier le chemin entier de l'image
 
 
+class Cookie(Object):
+
+    def __init__(self):
+        super().__init__()
+
+    self.r =10
+    self.objType = NPC
+    self.size = V2(self.r, self.r)
+
+    self.static = True
+    self.colliding = True
+    self.free = False
+
+    def render(self, screen, viewingCoordinates, debug = False):
+        #Création de pièces
+        absPos = self.pos - viewing Coordinates
+
+    centre = convertCoords(absPos)
+
+    pygame.draw.circle(screen, "#db911a" , center, self.r)
+
+    def __str__(self):
+        return "Cookie"
     
