@@ -65,6 +65,9 @@ class V2(pygame.Vector2):
 
         return V2(0, self.y)
 
+    def clone(self):
+        return V2(self.x, self.y)
+
 def drawCross(screen, p1, color="#ff0000", size=100):
     """
         drawCross: draws a cross at a given coordinate

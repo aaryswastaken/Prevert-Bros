@@ -19,7 +19,8 @@ class GameManager():
         The overall manager
     """
 
-    def __init__(self, debug=False, tfps=60):
+    def __init__(self, givenTime=360, debug=False, tfps=60):
+        self.givenTime = givenTime
         self.debug = debug 
         self.targetFps = tfps
 
@@ -32,6 +33,7 @@ class GameManager():
         self.uuid_counter = 0
 
         self.clock = None
+        self.time = None
         self.key = None
         self.rE.init()
 
@@ -139,9 +141,10 @@ class GameManager():
                 if self.dt != 0:
                     fps = 1/self.dt 
                     dbsf = self.dfont.render(f"FPS: {fps:.1f}", False, "#ff0000")
-                    self.rE.screen.blit(dbsf, (5, 5))
+                    self.rE.screen.blit(dbsf, (100, 5))
 
-            
+            self.rE.renderTime(self.time.get_ticks() / 1000, self.givenTime)
+
             # Finalise the frame and show it to the player
             self.rE.finaliseFrame()
             
