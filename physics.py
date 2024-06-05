@@ -37,6 +37,8 @@ class PhysicsEngine:
 
                     if o.vel.x < -self.maxPlayerSpeed:
                         o.vel.x = -self.maxPlayerSpeed
+                elif o.objType == ENNEMY:
+                    o.check_intervalle()
    
     def checkCollisions(self, obj, objects):
         """
