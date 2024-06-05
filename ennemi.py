@@ -8,8 +8,13 @@ class Ennemi(Object):
     Créer des NPC, issus de la classe Objet
     """
     
-    def __init__(self, chemin_image):
+    def __init__(self, chemin_image, x_apparition = 0, y_apparition = 0, taille_intervalle_x = 0):
         super().__init__()
+
+        self.pos = V2(x_apparition, y_apparition)
+        self.x_min = x_apparition - taille_intervalle_x/2
+        self.x_max = x_apparition + taille_intervalle_x/2
+        
         
         self.r = 15
 
@@ -35,6 +40,9 @@ class Ennemi(Object):
 
         screen.blit(self.chemin_image, absPos)
 
+    def check_intervalle(self):
+        if self.pos[0] > self.x_max or self.pos[0] < self.x_min:
+            self.vel = - self.vel
 
     def deplacement_droite(self,dt):
         """
