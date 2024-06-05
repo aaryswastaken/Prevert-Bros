@@ -1,7 +1,8 @@
 Projet d'ISN - Prévert Bros
 Auteurs : Aarys SAHLER, Lucie DAVID, Hélène PASSERAT DE LA CHAPELLE, Antoine DEMIN, Zoé FEUILLOY
 
-##Concept
+CONCEPT : 
+
 Nous avons voulu réaliser un jeu de plateformes en se basant sur le modèle de Mario Bros, dans un univers plus personnalisé qui est celui du Prévert, service de restauration bien connu des étudiant.e.s de l'INSA Lyon.
 
 ##Éléments
