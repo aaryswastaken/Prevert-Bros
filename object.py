@@ -8,7 +8,7 @@ import pygame
 from pygame.key import stop_text_input
 from pygame.time import wait
 
-from common import V2, drawCross, rectFromPoints, convertCoords, GROUND
+from common import V2, drawCross, rectFromPoints, convertCoords, GROUND, NPC
 
 
 class Object:
@@ -129,7 +129,7 @@ class Cookie(Object):
 
     def render(self, screen, viewingCoordinates, debug = False):
         #Création de pièces
-        absPos = self.pos - viewing Coordinates
+        absPos = self.pos - viewingCoordinates
         centre = convertCoords(absPos)
         pygame.draw.circle(screen, "#db911a" , center, self.r)
 
