@@ -7,7 +7,9 @@ Nous avons voulu réaliser un jeu de plateformes en se basant sur le modèle de 
 Dans ce projet nous avons mis en place plusieurs éléments. Le personnage principal se déplace sur des plateformes de hauteur variée, sur un décor qui avance avec lui. Il fera face à plusieurs ennemis et devra les éviter au mieux pour survivre. Il faudra également récupérer le plus de pièces (cookies) possible tout en étant rapide, car le temps (solde) n'est pas illimité ! 
 
 LANCEMENT ET FONCTIONNEMENT :
-Pour lancer le jeu, ouvrir le fichier "main.py" dans Spyder5. Pour déplacer le personage, le joueur doit se servir des touches D (pour avancer), A (pour reculer) et Espace (pour sauter). 
+Installer la libraire pygame : pip install pygame 
+Pour lancer le jeu, ouvrir le fichier "main.py" dans Spyder5.
+Pour déplacer le personage, le joueur doit se servir des touches D (pour avancer), A (pour reculer) et Espace (pour sauter). 
 
 REMERCIEMENTS : 
 Hervé RIVANO, notre professeur d'ISN ; le site Internet pygame.org ; la plateforme en ligne GitHub 
