@@ -1,7 +1,7 @@
 import pygame
 
 from object import Object
-from common import V2, drawCross, drawRectangle, convertCoords, PLAYER
+from common import V2, drawCross, drawRectangle, convertCoords, ENNEMY
 
 class Ennemi(Object):
     """
