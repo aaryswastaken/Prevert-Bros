@@ -20,7 +20,7 @@ if __name__ == "__main__":
     manager = GameManager(debug=debugFlag)
 
     ## Debug scene
-    from object import RectGroundPart
+    from object import RectGroundPart, Cookie
     from player import Player
     from common import V2
     from niveaux import Niveaux
