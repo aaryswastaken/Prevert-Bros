@@ -128,7 +128,7 @@ class PhysicsEngine:
                     return True
         return False
 
-     def isTouchingEnnemi(self, player, ennemi):
+    def isTouchingEnnemi(self, player, ennemi):
         # Vérifie si le joueur touche un ennemi
         if ennemi.uuid != player.uuid:
             if ennemi.isInScope(player.pos - player.size.onlyY(), \
