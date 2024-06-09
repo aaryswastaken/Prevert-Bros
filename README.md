@@ -8,7 +8,7 @@ Dans ce projet nous avons mis en place plusieurs éléments. Le personnage princ
 
 LANCEMENT ET FONCTIONNEMENT :
 Installer la libraire pygame : pip install pygame 
-Pour lancer le jeu, ouvrir le fichier "main.py" dans Spyder5.
+Pour lancer le jeu, ouvrir et exécuter le fichier "main.py" dans Spyder5.
 Pour déplacer le personage, le joueur doit se servir des touches D (pour avancer), A (pour reculer) et Espace (pour sauter). 
 
 REMERCIEMENTS : 
