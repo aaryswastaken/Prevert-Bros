@@ -79,8 +79,13 @@ class RectGroundPart(Object):
         # render the object to the screen, here a rectangle
         absPos = self.pos - viewingCoordinates
 
-        r = screen.fill(self.color, rectFromPoints(absPos, absPos + self.size))
-
+        if (self.image != ""):
+            loadedImage = pygame.image.load("./plateforme.png")
+            loadedImage = pygame.transform.scale(loadedImage, self.size)
+            screen.blit(loadedImage, rectFromPoints(absPos, absPos + self.size))
+        else :
+            r = screen.fill(self.color, rectFromPoints(absPos, absPos + self.size))
+            
         # if debug, we print the boundaries too 
         if debug:
             print("debug")
@@ -95,22 +100,12 @@ class RectGroundPart(Object):
         return f"Rectangle: {self.pos}, {self.pos + self.size}"
 
 
-#A CASER DANS LA PARTIE AFFICHAGE
-
-class PlateformeGroundPart(RectGroundPart):
-    """
-    Apporte un aspect plus esthétique aux plateformes
-    """
-    def __init__(self, pos, size, chemin):
-        super().__init__(pos, size, None) #car pas de couleur pour une image ou au pire enlever couleur dans la classe parent ??
-        self.chemin = pygame.image.load(chemin).convert() #apparemment c'est pour charger et convertir l'image
-
     def render(self, screen, viewingCoordinates, debug=False): # /!\ POUR LE COUP JAI JUSTE RECOPIER CELLE D'AVANT MAIS JE PENSE QUE YA DES CHOSES A CHANGER MAIS JAI PAS TOUT COMPRIS
         absPos = self.pos - viewingCoordinates
         #Fonction .blit(image, coord point en haut à gauche) pour afficher l'image sur l'écran
         screen.blit(self.chemin, absPos)
 
-#dans l'appel, ne pas oublier le chemin entier de l'image
+
 
 
 class Cookie(Object):
