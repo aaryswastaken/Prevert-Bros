@@ -197,10 +197,13 @@ class GameManager():
     
         if self.debug:
             print("did bottom")
-            
+
+    # Cette fonction a été rédigé en grande partie avec Chat GPT
     def victoire(self):
+        """
+        permet d'afficher la fenêtre de fin
+        """
         print("Vous pouvez passer la carte !")
-        pygame.quit()
         
         pygame.init()
 
@@ -208,35 +211,32 @@ class GameManager():
         largeur, hauteur = 800, 600
         fenetre = pygame.display.set_mode((largeur, hauteur))
 
-        # Définir la couleur de fond
-        couleur_fond = (0, 216, 69)  # Vert
-
+        image_fond = pygame.image.load('./fin.png')
+        #redimensionnement de l'image
+        image_fond = pygame.transform.scale(image_fond, (largeur,hauteur))
+        
         # Charger une police et définir la taille
-        police = pygame.font.Font(None, 60)  # Utilise la police par défaut
+        police = pygame.font.Font(None, 60) 
 
-        # Créer le texte
+
         texte1 = "Félicitations, vous avez gagné !"
-        texte2 = "Vous pouvez passer la carte !"
+        
         texte1_surface = police.render(texte1, True, (0, 0, 0))  # Texte noir
-        texte2_surface = police.render(texte2, True, (0, 0, 0))  # Texte noir
 
-        # Positionner le texte au centre de la fenêtre
-        texte1_rect = texte1_surface.get_rect(center=(largeur/2, hauteur/3))
-        texte2_rect = texte2_surface.get_rect(center=(largeur/2, 2*hauteur/3))
+        # Positionnement du texte
+        texte1_rect = texte1_surface.get_rect(center=(largeur/2, hauteur/1.2))
 
-        # Boucle principale
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-
-            # Remplir la fenêtre avec la couleur de fond
-            fenetre.fill(couleur_fond)
+    
+            #Met l'image de fond
+            fenetre.blit(image_fond, (0,0))
 
             # Blit le texte sur la fenêtre
             fenetre.blit(texte1_surface, texte1_rect)
-            fenetre.blit(texte2_surface, texte2_rect)
 
             # Mettre à jour l'affichage
             pygame.display.flip()
