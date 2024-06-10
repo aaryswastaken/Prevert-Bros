@@ -50,7 +50,7 @@ class RectGroundPart(Object):
         Defines a ground part that is rectangular
     """
 
-    def __init__(self, pos, size, color):
+    def __init__(self, pos, size, color, image = ""):
         super().__init__()
 
         self.size = size.abs()
@@ -59,6 +59,7 @@ class RectGroundPart(Object):
         self.color = color
 
         self.objType = GROUND
+        self.image = image
 
 
     def isInScope(self, p1, p2):  # Variables vraiment très mal nommées
