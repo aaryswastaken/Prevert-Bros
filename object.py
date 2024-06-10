@@ -100,14 +100,6 @@ class RectGroundPart(Object):
         return f"Rectangle: {self.pos}, {self.pos + self.size}"
 
 
-    def render(self, screen, viewingCoordinates, debug=False): # /!\ POUR LE COUP JAI JUSTE RECOPIER CELLE D'AVANT MAIS JE PENSE QUE YA DES CHOSES A CHANGER MAIS JAI PAS TOUT COMPRIS
-        absPos = self.pos - viewingCoordinates
-        #Fonction .blit(image, coord point en haut à gauche) pour afficher l'image sur l'écran
-        screen.blit(self.chemin, absPos)
-
-
-
-
 class Cookie(Object):
 
     def __init__(self, pos):
