@@ -120,8 +120,13 @@ class GameManager():
 
             # edit mort du joueur
             for p in self.players:
+                print("===========position=========")
+                print(p.pos)
                 if p.pos[1] < 0:
                     print(f"{p} est mort")
+                    p.pos = V2(50, 350)
+                elif p.pos[0] >= 2250:
+                    self.victoire()
                     #si ça marche gérer le score puis exit
 
             # Some debug
@@ -192,3 +197,46 @@ class GameManager():
     
         if self.debug:
             print("did bottom")
+            
+    def victoire(self):
+        print("Vous pouvez passer la carte !")
+        pygame.quit()
+        
+        pygame.init()
+
+        # Définir la taille de la fenêtre
+        largeur, hauteur = 800, 600
+        fenetre = pygame.display.set_mode((largeur, hauteur))
+
+        # Définir la couleur de fond
+        couleur_fond = (0, 216, 69)  # Vert
+
+        # Charger une police et définir la taille
+        police = pygame.font.Font(None, 60)  # Utilise la police par défaut
+
+        # Créer le texte
+        texte1 = "Félicitations, vous avez gagné !"
+        texte2 = "Vous pouvez passer la carte !"
+        texte1_surface = police.render(texte1, True, (0, 0, 0))  # Texte noir
+        texte2_surface = police.render(texte2, True, (0, 0, 0))  # Texte noir
+
+        # Positionner le texte au centre de la fenêtre
+        texte1_rect = texte1_surface.get_rect(center=(largeur/2, hauteur/3))
+        texte2_rect = texte2_surface.get_rect(center=(largeur/2, 2*hauteur/3))
+
+        # Boucle principale
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+
+            # Remplir la fenêtre avec la couleur de fond
+            fenetre.fill(couleur_fond)
+
+            # Blit le texte sur la fenêtre
+            fenetre.blit(texte1_surface, texte1_rect)
+            fenetre.blit(texte2_surface, texte2_rect)
+
+            # Mettre à jour l'affichage
+            pygame.display.flip()
