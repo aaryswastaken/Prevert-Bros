@@ -57,6 +57,10 @@ class RenderingEngine:
         time = self.font.render(f"{targetTime - time:.0f}", False, "#ffffff")
         self.screen.blit(time, (5, 5))
 
+    def renderCookieCount(self, cookieCount):
+        renderedCookieCount = self.font.render(f"{cookieCount} cookies", False, "#ffffff")
+        self.screen.blit(renderedCookieCount, (100, 5))
+
     def printBG(self, vpos):
         # Print the background, vpos is the viewing position defined as the bottom left corner of the viewing sight
 
