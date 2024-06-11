@@ -26,7 +26,7 @@ if __name__ == "__main__":
     from niveaux import Niveaux, Pieces
     
     for platform in Niveaux().coord:
-        manager.addObject(RectGroundPart(V2(platform[0], platform[1]), V2(platform[2], platform[3]), "#00ff00"))
+        manager.addObject(RectGroundPart(V2(platform[0], platform[1]), V2(platform[2], platform[3]), "#00ff00", "./plateforme.png"))
    
     manager.addObject(RectGroundPart(V2(-5000, 0), V2(5000, -200), "#ff0000"))
     # manager.addObject(RectGroundPart(V2(-500, 0), V2(2000, 200), "#00ff00"))
