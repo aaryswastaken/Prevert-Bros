@@ -5,7 +5,7 @@ from common import V2, drawCross, drawRectangle, convertCoords, ENNEMY
 
 class Ennemi(Object):
     """
-    Créer des NPC, issus de la classe Objet
+    Créer des Ennemis, issus de la classe Objet
     """
     
     def __init__(self, chemin_image, x_apparition = 0, y_apparition = 0, taille_intervalle_x = 0):
