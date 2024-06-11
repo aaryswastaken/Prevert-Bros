@@ -114,6 +114,7 @@ class Cookie(Object):
         self.static = True
         self.colliding = True
         self.free = False
+        self.collected = False
         
     def isInScope(self, p1, p2):  # Variables vraiment très mal nommées
         self.p1 = self.pos + self.size.onlyY()
@@ -130,10 +131,11 @@ class Cookie(Object):
         return verticaly_visible and horizontal_visible
 
     def render(self, screen, viewingCoordinates, debug = False):
-        #Création de pièces
-        absPos = self.pos - viewingCoordinates
-        centre = convertCoords(absPos)
-        pygame.draw.circle(screen, "#db911a" , centre, self.r)
+        if not self.collected: #Si la pièce n'a pas été collecté
+            #Création de pièces
+            absPos = self.pos - viewingCoordinates
+            centre = convertCoords(absPos)
+            pygame.draw.circle(screen, "#db911a" , centre, self.r)
 
     def __str__(self):
         return "Cookie"
