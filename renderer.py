@@ -39,7 +39,8 @@ class RenderingEngine:
 
         self.font = pygame.font.SysFont("Jetbrains Mono", 50)
 
-        self.bg = None
+        self.bg = pygame.image.load('fond_RI.png')
+        self.bg = pygame.transform.scale(self.bg, (self.size[0], self.size[1])) 
         if self.parent.debug:
             # if debug, we use the bg_debug.png as a background
             self.bg = pygame.image.load("bg_debug.png")
