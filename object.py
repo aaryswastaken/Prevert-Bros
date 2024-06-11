@@ -62,7 +62,7 @@ class RectGroundPart(Object):
         self.image = image
 
 
-    def isInScope(self, p1, p2):  # Variables vraiment très mal nommées
+    def isInScope(self, p1, p2):  
         self.p1 = self.pos + self.size.onlyY()
         self.p2 = self.pos + self.size.onlyX()
         top_pos = -1 if self.p1.y < p1.y else 1 if self.p1.y > p2.y else 0
