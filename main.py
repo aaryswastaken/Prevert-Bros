@@ -23,7 +23,7 @@ if __name__ == "__main__":
     from object import RectGroundPart, Cookie
     from player import Player
     from common import V2
-    from niveaux import Niveaux
+    from niveaux import Niveaux, Pieces
     
     for platform in Niveaux().coord:
         manager.addObject(RectGroundPart(V2(platform[0], platform[1]), V2(platform[2], platform[3]), "#00ff00"))
@@ -35,8 +35,9 @@ if __name__ == "__main__":
     player = Player(image="./PERSO.png")
     player.pos = V2(50, 350)
     manager.addObject(player, hasInput=True, isPlayer=True)
-
-    manager.addObject(Cookie(V2(25,25)))
+    
+    for cookie in Pieces().coord:
+        manager.addObject(Cookie(V2(cookie[0], cookie[1])))
                 
     ec = manager.run()
 

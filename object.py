@@ -8,7 +8,7 @@ import pygame
 from pygame.key import stop_text_input
 from pygame.time import wait
 
-from common import V2, drawCross, rectFromPoints, convertCoords, GROUND, NPC
+from common import V2, drawCross, rectFromPoints, convertCoords, GROUND, STATIC
 
 
 class Object:
@@ -107,13 +107,27 @@ class Cookie(Object):
         super().__init__()
 
         self.pos = pos
-        self.r =10
-        self.objType = NPC
+        self.r = 10
+        self.objType = STATIC
         self.size = V2(self.r, self.r)
 
         self.static = True
         self.colliding = True
         self.free = False
+        
+    def isInScope(self, p1, p2):  # Variables vraiment très mal nommées
+        self.p1 = self.pos + self.size.onlyY()
+        self.p2 = self.pos + self.size.onlyX()
+        top_pos = -1 if self.p1.y < p1.y else 1 if self.p1.y > p2.y else 0
+        bottom_pos = -1 if self.p2.y < p1.y else 1 if self.p2.y > p2.y else 0
+        # if we are not both above screen or both below screen, that means we are vertically visible
+        verticaly_visible = top_pos * bottom_pos != 1
+
+        left_pos = -1 if self.p1.x < p1.x else 1 if self.p1.x > p2.x else 0
+        right_pos = -1 if self.p2.x < p1.x else 1 if self.p2.x > p2.x else 0
+        horizontal_visible = left_pos * right_pos != 1
+
+        return verticaly_visible and horizontal_visible
 
     def render(self, screen, viewingCoordinates, debug = False):
         #Création de pièces
