@@ -11,7 +11,7 @@ import pygame
 from object import RectGroundPart
 from physics import PhysicsEngine
 from renderer import RenderingEngine
-from common import V2
+from common import V2, STATIC
 
 
 class GameManager():
@@ -48,6 +48,8 @@ class GameManager():
         self.followDy = 180
         self.followIncrement = 2
         self.followVec = V2(self.followDx, self.followDy)
+
+        self.cookieCount = 0
 
         if debug:
             pygame.font.init()
@@ -133,9 +135,13 @@ class GameManager():
             print(f"Updated viewingCoordinates: {self.viewingCoordinates}")
 
             for e in self.objects: # for every object
-                if e.isInScope(p1, p2): # if it has to be drawn 
+                if e.isInScope(p1, p2): # if it has to be drawn
                     print(f"Object {str(e)} is in scope") # debug
                     self.rE.render(e, self.viewingCoordinates, debug=self.debug) # render the object through the rendering engine
+                    if e.objType == STATIC:
+                        self.getCookie(e)
+            
+            self.rE.renderCookieCount(self.cookieCount)
 
 
             # If debug, do debug thing
@@ -155,6 +161,19 @@ class GameManager():
             
             # Ticking
             self.dt = self.clock.tick(self.targetFps) / 1000
+
+    def getCookie(self, obj):
+        limR = self.players[0].pos[0] + self.players[0].r
+        limL = self.players[0].pos[0] - self.players[0].r
+        limT = self.players[0].pos[1] + self.players[0].r*2
+        limB = self.players[0].pos[1] - self.players[0].r*2
+        if limR >= obj.pos[0] and limL <= obj.pos[0] and limT >= obj.pos[1] and limB <= obj.pos[1]:
+            #Ajouter 1 au compteur
+            self.cookieCount += 1
+            #effacer la pièce et l'enlever de la liste des objets
+            obj.collected = True
+            self.objects.remove(obj)
+            pygame.display.flip()
 
     def checkOutOfBounds(self):
         """
@@ -230,7 +249,6 @@ class GameManager():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                    sys.exit()
     
             #Met l'image de fond
             fenetre.blit(image_fond, (0,0))
