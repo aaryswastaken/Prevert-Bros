@@ -5,6 +5,7 @@
 # This file and its elements are in charge of handling the 
 # physics of the game.
 
+import pygame
 from common import V2, PLAYER, ENNEMY
 
 
