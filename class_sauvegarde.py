@@ -11,8 +11,6 @@ class Sauvegardes:
             with open(self.nom_fichier, mode='w', newline='') as fichier_csv:
                 writer = csv.writer(fichier_csv)
                 writer.writerow(['Cookies Recoltees', 'Solde Restant'])
-        
-        self.getRecords()
 
     def save(self, pieces_recoltees, solde_restant):
         # Ouvre le fichier en mode ajout ('a')
@@ -20,7 +18,9 @@ class Sauvegardes:
             writer = csv.writer(fichier_csv)
             
             # Ajoute les nouvelles données
-            writer.writerow([pieces_recoltees, solde_restant])
+            writer.writerow([pieces_recoltees, solde_restant]
+        
+        self.getRecords()
     
     def getRecords(self):
         #Ouvre le fichier en mode lecture
