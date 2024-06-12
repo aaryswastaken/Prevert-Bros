@@ -244,15 +244,20 @@ class GameManager():
         
         # Charger une police et définir la taille
         police = pygame.font.Font(None, 60) 
+        petite_police = pygame.font.Font(None, 40)
 
 
         texte1 = "Félicitations, vous avez gagné !"
+        texte2= "Malheureusement vous n'avez plus de solde," 
+        texte3= "c'est un echec même si vous êtes parvenus jusqu'ici ! "
         txt_cookiesRecord = f"Record cookies : {str(sauvegarde.cookiesRecord)}"
         txt_soldeRecord = f" Record solde : {str(sauvegarde.soldeRecord)}"
         txt_cookies = f"Cookie : {str(self.cookieCount)}"
         txt_solde = f"Solde: {str(self.soldeRestant)}"
         
         texte1_surface = police.render(texte1, True, (0, 0, 0))  # Texte noir
+        texte2_surface = petite_police.render(texte2, True, (0,0,0))
+        texte3_surface = petite_police.render(texte3, True, (0,0,0))
         txt_cookiesRecord_surface = police.render(txt_cookiesRecord, True, (0, 0, 0))
         txt_soldeRecord_surface = police.render(txt_soldeRecord, True, (0, 0, 0))
         txt_cookies_surface= police.render(txt_cookies, True, (0,0,0))
@@ -264,6 +269,9 @@ class GameManager():
         txt_soldeRecord_rect = txt_soldeRecord_surface.get_rect(center=(2.5*largeur/3.7, 500))
         txt_cookies_rect = txt_cookies_surface.get_rect(center=(largeur/5,450))
         txt_solde_rect = txt_solde_surface.get_rect(center = (largeur/5, 500))
+        texte2_rect = texte2_surface.get_rect(center=(largeur/2, hauteur/2.5))
+        texte3_rect = texte3_surface.get_rect(center=(largeur/2, hauteur/2))
+
 
 
         while True:
