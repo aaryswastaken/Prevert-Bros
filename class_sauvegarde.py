@@ -18,7 +18,7 @@ class Sauvegardes:
             writer = csv.writer(fichier_csv)
             
             # Ajoute les nouvelles données
-            writer.writerow([pieces_recoltees, solde_restant]
+            writer.writerow([pieces_recoltees, solde_restant])
         
         self.getRecords()
     
