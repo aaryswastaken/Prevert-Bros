@@ -252,9 +252,9 @@ class GameManager():
         txt_soldeRecord_surface = police.render(txt_soldeRecord, True, (0, 0, 0))
 
         # Positionnement du texte
-        texte1_rect = texte1_surface.get_rect(center=(largeur/2, hauteur/1.2))
-        txt_cookiesRecord_rect = txt_cookiesRecord_surface.get_rect(center=(3*largeur/4, 100))
-        txt_soldeRecord_rect = txt_soldeRecord_surface.get_rect(center=(3*largeur/4, 150))
+        texte1_rect = texte1_surface.get_rect(center=(largeur/2, hauteur/1.78))
+        txt_cookiesRecord_rect = txt_cookiesRecord_surface.get_rect(center=(2.5*largeur/4, 450))
+        txt_soldeRecord_rect = txt_soldeRecord_surface.get_rect(center=(2.5*largeur/4, 500))
 
         while True:
             for event in pygame.event.get():
