@@ -41,5 +41,10 @@ if __name__ == "__main__":
                 
     ec = manager.run()
 
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+
     if ec != 0:
         print("An error has occured, please check logs")
