@@ -11,5 +11,7 @@ Installer la libraire pygame : pip install pygame
 Pour lancer le jeu, ouvrir et exécuter le fichier "main.py" dans Spyder5.
 Pour déplacer le personage, le joueur doit se servir des touches D (pour avancer), A (pour reculer) et Espace (pour sauter). 
 
+L'historique des scores (solde restant + cookies) peut être lu dans le fichier excel "sauvegardes", qui se crée à la première partie et se remplie par la suite.
+
 REMERCIEMENTS : 
 Hervé RIVANO, notre professeur d'ISN ; le site Internet pygame.org ; la plateforme en ligne GitHub 
