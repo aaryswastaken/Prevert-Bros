@@ -5,7 +5,7 @@
 # This file and its elements are in charge of handling the 
 # physics of the game.
 
-from common import V2, PLAYER
+from common import V2, PLAYER, ENNEMY
 
 
 class PhysicsEngine:
@@ -128,10 +128,11 @@ class PhysicsEngine:
                     return True
         return False
 
+    # pour la méthode qui suit, ChatGpt à été utilisé
     def isTouchingEnnemi(self, player, ennemi):
         # Vérifie si le joueur touche un ennemi
-        if ennemi.uuid != player.uuid:
-            if ennemi.isInScope(player.pos - player.size.onlyY(), \
-                        player.pos - player.size.onlyY()):
-                    return True
+        player_rect = pygame.Rect(player.pos - player.size, player.size * 2)
+        ennemi_rect = pygame.Rect(ennemi.pos - ennemi.size, ennemi.size * 2)
+        if player_rect.colliderect(ennemi_rect):
+            return True
         return False
