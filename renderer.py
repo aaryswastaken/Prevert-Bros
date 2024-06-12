@@ -51,10 +51,10 @@ class RenderingEngine:
 
         self.screen.fill("black")
 
-    def renderTime(self, time, targetTime):
+    def renderTime(self, time):
         # Render the remaining time 
 
-        time = self.font.render(f"{targetTime - time:.0f}", False, "#ffffff")
+        time = self.font.render(f"{time:.0f}", False, "#ffffff")
         self.screen.blit(time, (5, 5))
 
     def renderCookieCount(self, cookieCount):
