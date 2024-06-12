@@ -11,7 +11,7 @@ import pygame
 from object import RectGroundPart
 from physics import PhysicsEngine
 from renderer import RenderingEngine
-from common import V2, STATIC
+from common import V2, STATIC, ENNEMY
 from class_sauvegarde import Sauvegardes
 
 
@@ -130,7 +130,10 @@ class GameManager():
                 elif p.pos[0] >= 2250:
                     self.victoire()
                     #si ça marche gérer le score puis exit
-
+                for obj in self.objects:
+                    if obj.objType == ENNEMY and self.pE.isTouchingEnnemi(p, obj):# mort du player s'il rentre en contact avec l'ennemi
+                        self.mort()
+                
             # Some debug
             print(f"Updated viewingCoordinates: {self.viewingCoordinates}")
 
@@ -246,15 +249,22 @@ class GameManager():
         texte1 = "Félicitations, vous avez gagné !"
         txt_cookiesRecord = f"Record cookies : {str(sauvegarde.cookiesRecord)}"
         txt_soldeRecord = f" Record solde : {str(sauvegarde.soldeRecord)}"
+        txt_cookies = f"Cookie : {str(self.cookieCount)}"
+        txt_solde = f"Solde: {str(self.soldeRestant)}"
         
         texte1_surface = police.render(texte1, True, (0, 0, 0))  # Texte noir
         txt_cookiesRecord_surface = police.render(txt_cookiesRecord, True, (0, 0, 0))
         txt_soldeRecord_surface = police.render(txt_soldeRecord, True, (0, 0, 0))
+        txt_cookies_surface= police.render(txt_cookies, True, (0,0,0))
+        txt_solde_surface = police.render(txt_solde, True, (0,0,0))
 
         # Positionnement du texte
         texte1_rect = texte1_surface.get_rect(center=(largeur/2, hauteur/1.78))
-        txt_cookiesRecord_rect = txt_cookiesRecord_surface.get_rect(center=(2.5*largeur/4, 450))
-        txt_soldeRecord_rect = txt_soldeRecord_surface.get_rect(center=(2.5*largeur/4, 500))
+        txt_cookiesRecord_rect = txt_cookiesRecord_surface.get_rect(center=(2.5*largeur/3.7, 450))
+        txt_soldeRecord_rect = txt_soldeRecord_surface.get_rect(center=(2.5*largeur/3.7, 500))
+        txt_cookies_rect = txt_cookies_surface.get_rect(center=(largeur/5,450))
+        txt_solde_rect = txt_solde_surface.get_rect(center = (largeur/5, 500))
+
 
         while True:
             for event in pygame.event.get():
@@ -268,6 +278,8 @@ class GameManager():
             fenetre.blit(texte1_surface, texte1_rect)
             fenetre.blit(txt_cookiesRecord_surface, txt_cookiesRecord_rect)
             fenetre.blit(txt_soldeRecord_surface, txt_soldeRecord_rect)
+            fenetre.blit(txt_cookies_surface, txt_cookies_rect)
+            fenetre.blit(txt_solde_surface, txt_solde_rect)
 
             # Mettre à jour l'affichage
             pygame.display.flip()
