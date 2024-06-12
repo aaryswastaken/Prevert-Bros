@@ -274,12 +274,18 @@ class GameManager():
             #Met l'image de fond
             fenetre.blit(image_fond, (0,0))
 
+            if self.soldeRestant >0:
             # Blit le texte sur la fenêtre
-            fenetre.blit(texte1_surface, texte1_rect)
-            fenetre.blit(txt_cookiesRecord_surface, txt_cookiesRecord_rect)
-            fenetre.blit(txt_soldeRecord_surface, txt_soldeRecord_rect)
-            fenetre.blit(txt_cookies_surface, txt_cookies_rect)
-            fenetre.blit(txt_solde_surface, txt_solde_rect)
-
+                fenetre.blit(texte1_surface, texte1_rect)
+                fenetre.blit(txt_cookiesRecord_surface, txt_cookiesRecord_rect)
+                fenetre.blit(txt_soldeRecord_surface, txt_soldeRecord_rect)
+                fenetre.blit(txt_cookies_surface, txt_cookies_rect)
+                fenetre.blit(txt_solde_surface, txt_solde_rect)
+            else:#Cas où le solde s'est complétement écoulé
+                fenetre.blit(texte2_surface, texte2_rect)
+                fenetre.blit(texte3_surface, texte3_rect)
+                fenetre.blit(txt_cookiesRecord_surface, txt_cookiesRecord_rect)
+                fenetre.blit(txt_soldeRecord_surface, txt_soldeRecord_rect)
+            
             # Mettre à jour l'affichage
             pygame.display.flip()
