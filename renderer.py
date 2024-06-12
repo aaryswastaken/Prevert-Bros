@@ -54,11 +54,11 @@ class RenderingEngine:
     def renderTime(self, time):
         # Render the remaining time 
 
-        time = self.font.render(f"{time:.0f}", False, "#ffffff")
+        time = self.font.render(f"{time:.0f}", False, "#000000")
         self.screen.blit(time, (5, 5))
 
     def renderCookieCount(self, cookieCount):
-        renderedCookieCount = self.font.render(f"{cookieCount} cookies", False, "#ffffff")
+        renderedCookieCount = self.font.render(f"{cookieCount} cookies", False, "#000000")
         self.screen.blit(renderedCookieCount, (100, 5))
 
     def printBG(self, vpos):
