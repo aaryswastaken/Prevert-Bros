@@ -14,4 +14,4 @@ Pour déplacer le personage, le joueur doit se servir des touches D (pour avance
 L'historique des scores (solde restant + cookies) peut être lu dans le fichier CSV "sauvegardes", qui se crée à la première partie et se remplie par la suite.
 
 REMERCIEMENTS : 
-Hervé RIVANO, notre professeur d'ISN ; le site Internet pygame.org ; la plateforme en ligne GitHub 
+Hervé RIVANO, notre professeur d'ISN ; le site Internet pygame.org ; la plateforme en ligne GitHub; l'intelligence artificielle ChatGPT  
