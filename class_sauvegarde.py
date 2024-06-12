@@ -28,7 +28,7 @@ class Sauvegardes:
             reader = csv.DictReader(fichier_csv)
             
             max_pieces_recoltees = 0
-            min_solde_restant = 360
+            max_solde_restant = 0
             
             for row in reader:
                 pieces_recoltees = int(row['Cookies Recoltees'])
@@ -37,7 +37,7 @@ class Sauvegardes:
                 if pieces_recoltees > max_pieces_recoltees:
                     max_pieces_recoltees = pieces_recoltees
                 
-                if solde_restant < min_solde_restant:
-                    min_solde_restant = solde_restant
+                if solde_restant > max_solde_restant:
+                    max_solde_restant = solde_restant
             
-            self.cookiesRecord, self.soldeRecord = max_pieces_recoltees, min_solde_restant
+            self.cookiesRecord, self.soldeRecord = max_pieces_recoltees, max_solde_restant
