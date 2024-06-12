@@ -12,6 +12,7 @@ from object import RectGroundPart
 from physics import PhysicsEngine
 from renderer import RenderingEngine
 from common import V2, STATIC
+from class_sauvegarde import Sauvegardes
 
 
 class GameManager():
@@ -125,8 +126,7 @@ class GameManager():
                 print("===========position=========")
                 print(p.pos)
                 if p.pos[1] < 0:
-                    print(f"{p} est mort")
-                    p.pos = V2(50, 350)
+                    self.mort()
                 elif p.pos[0] >= 2250:
                     self.victoire()
                     #si ça marche gérer le score puis exit
@@ -154,7 +154,8 @@ class GameManager():
                     dbsf = self.dfont.render(f"FPS: {fps:.1f}", False, "#ff0000")
                     self.rE.screen.blit(dbsf, (100, 5))
 
-            self.rE.renderTime(self.time.get_ticks() / 1000, self.givenTime)
+            self.soldeRestant = self.givenTime - self.time.get_ticks() / 1000
+            self.rE.renderTime(self.soldeRestant)
 
             # Finalise the frame and show it to the player
             self.rE.finaliseFrame()
@@ -174,6 +175,9 @@ class GameManager():
             obj.collected = True
             self.objects.remove(obj)
             pygame.display.flip()
+
+    def mort(self):
+        self.players[0].pos = V2(50, 350)
 
     def checkOutOfBounds(self):
         """
@@ -222,7 +226,8 @@ class GameManager():
         """
         permet d'afficher la fenêtre de fin
         """
-        print("Vous pouvez passer la carte !")
+        sauvegarde = Sauvegardes()
+        sauvegarde.save(str(self.cookieCount), f"{self.soldeRestant:.0f}")
         
         pygame.init()
 
@@ -239,11 +244,17 @@ class GameManager():
 
 
         texte1 = "Félicitations, vous avez gagné !"
+        txt_cookiesRecord = f"Record cookies : {str(sauvegarde.cookiesRecord)}"
+        txt_soldeRecord = f" Record solde : {str(sauvegarde.soldeRecord)}"
         
         texte1_surface = police.render(texte1, True, (0, 0, 0))  # Texte noir
+        txt_cookiesRecord_surface = police.render(txt_cookiesRecord, True, (0, 0, 0))
+        txt_soldeRecord_surface = police.render(txt_soldeRecord, True, (0, 0, 0))
 
         # Positionnement du texte
         texte1_rect = texte1_surface.get_rect(center=(largeur/2, hauteur/1.2))
+        txt_cookiesRecord_rect = txt_cookiesRecord_surface.get_rect(center=(3*largeur/4, 100))
+        txt_soldeRecord_rect = txt_soldeRecord_surface.get_rect(center=(3*largeur/4, 150))
 
         while True:
             for event in pygame.event.get():
@@ -255,6 +266,8 @@ class GameManager():
 
             # Blit le texte sur la fenêtre
             fenetre.blit(texte1_surface, texte1_rect)
+            fenetre.blit(txt_cookiesRecord_surface, txt_cookiesRecord_rect)
+            fenetre.blit(txt_soldeRecord_surface, txt_soldeRecord_rect)
 
             # Mettre à jour l'affichage
             pygame.display.flip()
