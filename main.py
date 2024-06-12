@@ -7,7 +7,7 @@
 # This project and every part of is isn't associated by any
 # means to the Nintendo corporation and has been developped
 # for entertainement purpose only
-
+import pygame
 import sys
 from game import GameManager
 
@@ -24,6 +24,7 @@ if __name__ == "__main__":
     from player import Player
     from common import V2
     from niveaux import Niveaux, Pieces
+    from ennemi import Ennemi
     
     for platform in Niveaux().coord:
         manager.addObject(RectGroundPart(V2(platform[0], platform[1]), V2(platform[2], platform[3]), "#00ff00", "./plateforme.png"))
@@ -38,7 +39,12 @@ if __name__ == "__main__":
     
     for cookie in Pieces().coord:
         manager.addObject(Cookie(V2(cookie[0], cookie[1])))
-                
+
+    ennemi1 = Ennemi("./Vous_voulez_une_boisson.png", 1200, 350, 100)
+    manager.addObject(ennemi1, hasInput= False, isPlayer=False)
+    ennemi2 = Ennemi("./ya_plus_de_paninis.png", 520, 350, 60)
+    manager.addObject(ennemi2, hasInput= False, isPlayer=False)
+
     ec = manager.run()
 
     while True:
