@@ -18,10 +18,10 @@ class Ennemi(Object):
         
         self.r = 15
 
-        self.chemin_image = pygame.image.load(chemin_image).convert()
+        self.image = pygame.image.load(chemin_image).convert()
         self.objType = ENNEMY
         self.size = V2(self.r, self.r)
-        Object.vel = V2(15,15) #valeur aléatoire à voir, j'ai pas tout compris ce que ça donnait
+        Object.vel = V2(15,15) 
         
         self.static = False
         self.colliding = True
@@ -37,8 +37,11 @@ class Ennemi(Object):
 
     def render(self, screen, vC, debug=False): 
         absPos = self.pos - vC
+        center = convertCoords(absPos)
 
-        screen.blit(self.chemin_image, absPos)
+        image = self.image
+        self.image = pygame.transform.scale(image, self.size*3)
+        screen.blit(self.image, (center.x, center.y-2*self.r))
 
     def check_intervalle(self):
         if self.pos[0] > self.x_max or self.pos[0] < self.x_min:
